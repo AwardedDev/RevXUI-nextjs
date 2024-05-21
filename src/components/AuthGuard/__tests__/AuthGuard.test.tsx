@@ -9,7 +9,7 @@ jest.mock('next/router', () => require('next-router-mock'));
 describe('AuthGuard', () => {
   const Component = () => <>child-component</>;
 
-  const mockComponent = (requireAuth, status = 'loading', data = null) => {
+  const renderComponent = (requireAuth, status = 'loading', data = null) => {
     const useSessionMock = {
       ...jest.requireActual('next-auth/react'),
       status,
@@ -32,7 +32,7 @@ describe('AuthGuard', () => {
     const requireAuth = false;
 
     // act
-    mockComponent(requireAuth);
+    renderComponent(requireAuth);
 
     // assert
     expect(screen.getByText('child-component')).toBeInTheDocument();
@@ -43,7 +43,7 @@ describe('AuthGuard', () => {
     const requireAuth = true;
 
     // act
-    mockComponent(requireAuth);
+    renderComponent(requireAuth);
 
     // assert
     expect(screen.queryByText('child-component')).not.toBeInTheDocument();
@@ -55,7 +55,7 @@ describe('AuthGuard', () => {
     const status = 'unauthenticated';
 
     // act
-    mockComponent(requireAuth, status);
+    renderComponent(requireAuth, status);
 
     // assert
     expect(screen.queryByText('child-component')).not.toBeInTheDocument();
@@ -68,7 +68,7 @@ describe('AuthGuard', () => {
     const status = 'authenticated';
 
     // act
-    mockComponent(requireAuth, status, { error: true });
+    renderComponent(requireAuth, status, { error: true });
 
     // assert
     expect(nextAuth.signOut).toHaveBeenCalled();
@@ -84,7 +84,7 @@ describe('AuthGuard', () => {
         const requireAuth = true;
 
         // act
-        mockComponent(requireAuth, theory.status);
+        renderComponent(requireAuth, theory.status);
 
         // assert
         expect(nextAuth.signIn).not.toHaveBeenCalled();

@@ -33,8 +33,6 @@ Once the artifact has been deployed to Azure App Service, NPM modules are then i
 
 [`npmInstall.yml`](/.pipelines/app/templates/npmInstall.yml)
 
-> NOTE: For artifactory use, this template utilizes [artifactory-credentials](https://github.carmax.com/CarMax/online-platform-azure-pipelines/blob/master/src/templates/artifactory-credentials.yml) task in additon to `ArtifactoryNpm@2` to authenticate & install.
-
 - caches and installs `npm`, `cypress`, and `nextjs` installations
 
 [`build.yml`](/.pipelines/app/templates/build.yml)
