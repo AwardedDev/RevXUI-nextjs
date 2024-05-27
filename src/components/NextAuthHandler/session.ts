@@ -1,4 +1,4 @@
-export async function session({ session, token }) {
+export default async function session({ session, token }) {
   session.error = token.error;
   session.user = token.user;
   session.idToken = token.account.id_token;

@@ -1,4 +1,4 @@
-describe('AzureB2cProvider', () => {
+describe('RevXAzureB2cProvider', () => {
   it('should render', () => {
     // arrange
     // act

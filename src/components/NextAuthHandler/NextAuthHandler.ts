@@ -1,9 +1,9 @@
 import NextAuth from 'next-auth';
 
-import AzureB2cProvider from './AzureB2cProvider';
 import fetchWellKnown from './fetchWellKnown';
 import isTokenValid from './getExpirationTime';
-import { session } from './session';
+import RevXAzureB2cConfig from './RevXAzureB2cConfig';
+import session from './session';
 
 type Options = {
   clientId: string;
@@ -21,8 +21,8 @@ type tokenWithAccount = {
   error?: string;
 };
 
-export default function NextAuthIdac(options: Options) {
-  async function refreshAccessToken(token: tokenWithAccount) {
+export default function NextAuthHandler(options: Options) {
+  const refreshAccessToken = async (token: tokenWithAccount) => {
     try {
       const { token_endpoint } = await fetchWellKnown(options.wellKnown);
 
@@ -53,10 +53,12 @@ export default function NextAuthIdac(options: Options) {
         error: 'RefreshAccessTokenError',
       };
     }
-  }
+  };
 
-  async function jwt({ token, account, user }) {
+  const jwt = async ({ token, account, user }) => {
     if (account) {
+      // console.log('test - jwt', { account });
+
       const { end_session_endpoint } = await fetchWellKnown(options.wellKnown);
       token.account = account;
       token.user = user;
@@ -74,9 +76,9 @@ export default function NextAuthIdac(options: Options) {
       },
       error: refreshAccount.error,
     };
-  }
+  };
 
-  async function redirect({ url, baseUrl }) {
+  const redirect = async ({ url, baseUrl }) => {
     // Allows relative callback URLs
     if (url.startsWith('/')) return `${baseUrl}${url}`;
     // Allows callback URLs on the same origin
@@ -87,10 +89,10 @@ export default function NextAuthIdac(options: Options) {
     if (new URL(url).origin === new URL(end_session_endpoint).origin) return url;
 
     return baseUrl;
-  }
+  };
 
   return NextAuth({
-    providers: [AzureB2cProvider(options)],
+    providers: [RevXAzureB2cConfig(options)],
     callbacks: {
       jwt,
       session,
