@@ -31,7 +31,7 @@ type OAuthConfigIDAC<P> = OAuthConfig<P> & {
   primaryUserFlow: string;
 };
 
-export default function RevXAzureB2cConfig<P extends RevXProfile>(
+export default function RevXAzureB2cProvider<P extends RevXProfile>(
   options: IDACOptions
 ): OAuthConfigIDAC<P> {
   const { clientId, wellKnown } = options;

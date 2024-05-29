@@ -1,4 +1,4 @@
-import RevXAzureB2cConfig from '../RevXAzureB2cConfig';
+import RevXAzureB2cProvider from '../RevXAzureB2cProvider';
 
 describe('RevXAzureB2cConfig', () => {
   it('should return expected config', () => {
@@ -22,7 +22,7 @@ describe('RevXAzureB2cConfig', () => {
     };
 
     // act
-    const results = RevXAzureB2cConfig(options);
+    const results = RevXAzureB2cProvider(options);
 
     // assert
     expect(results).toEqual(expected);
@@ -59,7 +59,7 @@ describe('RevXAzureB2cConfig', () => {
     const tokens = null;
 
     // act
-    const { profile } = RevXAzureB2cConfig(options);
+    const { profile } = RevXAzureB2cProvider(options);
     const results = profile(revXProfile, tokens);
 
     // assert

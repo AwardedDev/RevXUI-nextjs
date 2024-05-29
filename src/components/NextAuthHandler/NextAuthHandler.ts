@@ -1,9 +1,9 @@
 import NextAuth from 'next-auth';
 
-import fetchWellKnown from './fetchWellKnown';
-import isTokenValid from './getExpirationTime';
-import RevXAzureB2cConfig from './RevXAzureB2cConfig';
-import session from './session';
+import fetchWellKnown from './utils/fetchWellKnown';
+import isTokenValid from './utils/getExpirationTime';
+import RevXAzureB2cProvider from './utils/RevXAzureB2cProvider';
+import session from './utils/session';
 
 type Options = {
   clientId: string;
@@ -92,7 +92,7 @@ export default function NextAuthHandler(options: Options) {
   };
 
   return NextAuth({
-    providers: [RevXAzureB2cConfig(options)],
+    providers: [RevXAzureB2cProvider(options)],
     callbacks: {
       jwt,
       session,
