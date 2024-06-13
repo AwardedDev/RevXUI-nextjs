@@ -9,15 +9,21 @@
 
 The purpose of this repo is to accelerate startup time when creating a new [NextJs](https://nextjs.org/docs) app.
 
+The setup and configuration includes a number of opinionated best-practices in attempt to keep the code clean, safe, and free of bugs.
+
+Code is formatted and linted with each save, if [configured](#ide-configuration), or at least before each commit with the help of husky.
+
+Tests are configured for both unit and integration tests. Unit tests are performed with jest where msw helps avoid mocking http requests, both server and client, which allows for easier integration tests.
+
 ## Contents
 
 - [Getting Started](#getting-started)
 - [Directory Structure](#directory-structure)
-- [Features](#features)
 - [Libraries](#libraries)
 - [Scripts](#scripts)
 - [IDE Configurations](#ide-configuration)
 - [Committing Changes](#committing-changes)
+- [Deployments](#deployments)
 
 # Getting Started
 
@@ -88,14 +94,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to start.
 ┃ ┃ ┗ 📜 postsService.test.ts
 ┃ ┗ 📜 postsService.ts
 ```
-
-# Features
-
-The setup and configuration includes a number of opinionated best-practices in attempt to keep the code clean, safe, and free of bugs.
-
-Code is formatted and linted with each save, if [configured](#ide-configuration), or at least before each commit with the help of husky.
-
-Tests are configured for both unit and integration tests. Unit tests are performed with jest where msw helps avoid mocking http requests, both server and client, which allows for easier integration tests.
 
 # Libraries
 
@@ -210,57 +208,10 @@ npm run pre-commit   # this is ran prior to a git commit - runs lint and checks 
 
 ## VS Code
 
-The `.vscode` directory is checked into this repo and serves to share common settings and defaults.
+The `.vscode` directory is checked into this repo and serves to share common settings and defaults, [read more](./.vscode).
 
 [Recommended Extensions](https://code.visualstudio.com/docs/editor/extension-marketplace#_recommended-extensions) are configured, be sure to install.
 
-| Setting                  | Description                                                       |
-| ------------------------ | ----------------------------------------------------------------- |
-| eslint.validate          | Validate and fixes eslint errors. This also fixes prettier issues |
-| typescript.suggest.paths | Turned off to enable correct usage within auto-rename-tag         |
-
-| Extension          | Description                             |
-| ------------------ | --------------------------------------- |
-| code-spell-checker | checks spelling errors withing the code |
-| vscode-icons       | Directory icons                         |
-| vscode-jest        | Helps renaming tags                     |
-| auto-rename-tag    | Helps renaming tags                     |
-| vscode-eslint      | Integrate with lint rules               |
-
-### Snippets
-
-```javascript
-// entering: desc
-describe('', () => {});
-```
-
-```javascript
-// entering: it
-it('should ', () => {
-  // arrange
-  // act
-  // assert
-});
-```
-
-```javascript
-// entering: ita
-it('should ', async () => {
-  // arrange
-  // act
-  // assert
-});
-```
-
-```javascript
-// entering: func
-export default function () {}
-```
-
-```javascript
-// entering: hook
-export default function use() {}
-```
 
 ## Webstorm
 
@@ -287,3 +238,6 @@ Should the need arise to ignore the hook, manually commit using `--no-verify`
 # Example
 git commit -m "commit message" --no-verify
 ```
+
+# Deployments
+This application uses automated pipelines to perform automated build and deployments using Azure Pipelines, [read more](./.pipelines/). 
