@@ -1,11 +1,11 @@
 {
   "workbench.iconTheme": "vscode-icons",
   "editor.codeActionsOnSave": {
-    "source.fixAll": true
+    "source.fixAll": "explicit"
   },
   "eslint.validate": [
     "typescript",
     "typescriptreact"
   ],
-  "files.autoSave": "afterDelay"
+  "files.autoSave": "onFocusChange"
 }
